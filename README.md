@@ -186,6 +186,18 @@ curl --location 'http://12345.execute-api.localhost.localstack.cloud:4566/dev/pr
 
 Expected response: `A DynamoDB error occurred. Message sent to queue.`
 
+Check list messenge in SQS
+
+```bash
+awslocal sqs list-queues
+```
+
+Read content SQS
+
+```bash
+awslocal sqs receive-message --queue-url [url]
+```
+
 The message is automatically processed when you clear the outage:
 
 ```shell
