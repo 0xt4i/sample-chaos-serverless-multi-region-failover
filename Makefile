@@ -20,8 +20,8 @@ check:			## Check if all required prerequisites are installed
 	@command -v python3 > /dev/null 2>&1 || { echo "Python 3 is not installed. Please install Python 3 and try again."; exit 1; }
 	@echo "All required prerequisites are available."
 
-install:			## Install all required dependencies
-	@echo "Installing all required dependencies..."
+install:			## Install all required dired dependenciesependencies
+	@echo "Installing all requ..."
 	cd lambda-functions && mvn clean package shade:shade;
 	cd tests && pip install -r requirements-dev.txt;
 	@echo "All required dependencies installed successfully."

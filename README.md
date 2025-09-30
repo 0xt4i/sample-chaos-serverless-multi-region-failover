@@ -140,7 +140,7 @@ curl --location 'http://12345.execute-api.localhost.localstack.cloud:4566/dev/pr
     "name": "Test Product",
     "price": "29.99",
     "description": "A product for testing chaos scenarios"
-  }'
+  }' && echo ""
 ```
 
 Expected response: `Product added/updated successfully.`
@@ -174,14 +174,14 @@ To simulate a DynamoDB outage:
 ```shell
 curl -X POST 'http://localhost:4566/_localstack/chaos/faults' \
   -H 'Content-Type: application/json' \
-  -d '[{"service": "dynamodb", "region": "us-east-1"}]'
+  -d '[{"service": "dynamodb", "region": "us-east-1"}]' && echo ""
 ```
 
 During the outage, product creation requests are gracefully handled:
 
 ```shell
 curl --location 'http://12345.execute-api.localhost.localstack.cloud:4566/dev/productApi' \
-  --data '{"id": "prod-outage", "name": "Outage Test", "price": "19.99", "description": "Testing resilience"}'
+  --data '{"id": "prod-outage", "name": "Outage Test", "price": "19.99", "description": "Testing resilience"}' && echo ""
 ```
 
 Expected response: `A DynamoDB error occurred. Message sent to queue.`
@@ -191,7 +191,7 @@ The message is automatically processed when you clear the outage:
 ```shell
 curl -X DELETE 'http://localhost:4566/_localstack/chaos/faults' \
   -H 'Content-Type: application/json' \
-  -d '[]'
+  -d '[]' && echo ""
 ```
 
 Query the DynamoDB table to see the product:
@@ -235,7 +235,7 @@ curl -X POST 'http://localhost:4566/_localstack/chaos/faults' \
   -d '[
     {"service": "apigateway", "region": "us-east-1"},
     {"service": "lambda", "region": "us-east-1"}
-  ]'
+  ]' && echo ""
 ```
 
 Wait for health check failures and verify the failover:
@@ -250,7 +250,7 @@ Clear the chaos to test failback:
 ```shell
 curl -X DELETE 'http://localhost:4566/_localstack/chaos/faults' \
   -H 'Content-Type: application/json' \
-  -d '[]'
+  -d '[]' && echo ""
 ```
 
 ## Troubleshooting
